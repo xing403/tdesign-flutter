@@ -14,6 +14,7 @@ export 'src/components/empty/td_empty.dart';
 export 'src/components/icon/td_icons.dart';
 export 'src/components/image/image_widget.dart';
 export 'src/components/image/td_image.dart';
+export 'src/components/indexes/td_indexes.dart';
 export 'src/components/input/input_view.dart';
 export 'src/components/input/td_input.dart';
 export 'src/components/link/td_link.dart';

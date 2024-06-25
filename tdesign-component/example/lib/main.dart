@@ -25,6 +25,7 @@ void main() {
     });
   });
   sideBarExamplePage.forEach(examplePageList.add);
+  indexesExamplePage.forEach(examplePageList.add);
 }
 
 class MyApp extends StatefulWidget {

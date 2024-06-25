@@ -41,6 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     TDExampleRoute.init();
     sideBarExamplePage.forEach(TDExampleRoute.add);
+    indexesExamplePage.forEach(TDExampleRoute.add);
   }
 
   @override

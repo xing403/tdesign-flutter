@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'base/example_base.dart';
+import 'page/indexes/td_indexes_page.dart';
+import 'page/indexes/td_indexes_page_letter.dart';
 import 'page/sidebar/td_sidebar_page.dart';
 import 'page/sidebar/td_sidebar_page_anchor.dart';
 import 'page/sidebar/td_sidebar_page_custom.dart';
@@ -80,8 +82,7 @@ Map<String, List<ExamplePageModel>> exampleMap = {
     ExamplePageModel(
         text: 'Indexes 索引',
         name: 'indexes',
-        isTodo: true,
-        pageBuilder: _wrapInheritedTheme((context) => const TodoPage())),
+        pageBuilder: _wrapInheritedTheme((context) => const TDIndexesPage())),
     ExamplePageModel(
         text: 'NavBar 导航栏', name: 'navbar', pageBuilder: _wrapInheritedTheme((context) => const TDNavBarPage())),
     ExamplePageModel(
@@ -277,4 +278,13 @@ List<ExamplePageModel> sideBarExamplePage = [
       name: 'SideBarCustom',
       isTodo: false,
       pageBuilder: _wrapInheritedTheme((context) => const TDSideBarCustomPage()))
+];
+
+List<ExamplePageModel> indexesExamplePage = [
+  ExamplePageModel(
+      text: 'indexes 字母索引',
+      name: 'indexesLetter',
+      isTodo: false,
+      pageBuilder:
+          _wrapInheritedTheme((context) => const TDIndexesLetterPage())),
 ];
