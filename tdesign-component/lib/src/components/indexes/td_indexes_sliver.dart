@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -41,6 +43,8 @@ class _TDIndexesSliverState extends State<TDIndexesSliver> {
     return Row(
       children: [
         // 游标
+        _reminderChild(context),
+
         /// 字母列表
         _getLetterList(context)
       ],
@@ -78,7 +82,13 @@ class _TDIndexesSliverState extends State<TDIndexesSliver> {
     return GestureDetector(
       onVerticalDragDown: _onVerticalDragDownSliverItem,
       onVerticalDragUpdate: _onVerticalDragDownSliverItem,
-      // onVerticalDragEnd: _onVerticalDragEndSliverItem,
+      onVerticalDragEnd: _onVerticalDragEndSliverItem,
+      onTapUp: (details) {
+        setState(() {
+          _currentActiveIndex = -1;
+          _reminderOffsetY = 0;
+        });
+      },
       child: Container(
         alignment: Alignment.centerRight,
         height: widget.children.length * _sliverItemHeight * 1.0,
@@ -91,15 +101,53 @@ class _TDIndexesSliverState extends State<TDIndexesSliver> {
     );
   }
 
+  Widget _reminderChild(BuildContext context) {
+    if (_currentActiveIndex == -1) {
+      return Container();
+    }
+    return Container(
+      height: reminderHeight,
+      alignment: Alignment(0.0, _reminderOffsetY),
+      child: Padding(
+        padding: const EdgeInsets.only(right: 8),
+        child: Container(
+          width: 48,
+          height: 48,
+          decoration: BoxDecoration(
+            color: TDTheme.of(context).brandColor3,
+            borderRadius: const BorderRadius.all(Radius.circular(999)),
+          ),
+          child: Center(
+            child: TDText(
+              widget.children[_currentActiveIndex],
+              textColor: TDTheme.of(context).whiteColor1,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   void _onVerticalDragDownSliverItem(dynamic details) async {
     _reminderOffsetY = details.localPosition.dy; // 记录手指按下时的位置
 
     var index = (_reminderOffsetY ~/ _sliverItemHeight)
         .clamp(0, widget.children.length - 1);
     var letter = widget.children[index];
+    var offset = index / max(widget.children.length - 1, 1) * 2 - 1;
     setState(() {
       _currentActiveIndex = index;
+      _reminderOffsetY = offset;
     });
     widget.onChange?.call(letter);
   }
+
+  void _onVerticalDragEndSliverItem(details) {
+    setState(() {
+      _currentActiveIndex = -1;
+      _reminderOffsetY = 0;
+    });
+  }
+
+  get reminderHeight => 1.0 * widget.children.length * _sliverItemHeight + 28;
 }

@@ -90,7 +90,7 @@ class _TDIndexesState extends State<TDIndexes> {
         return;
       }
 
-      print('你需要滚动的距离 $offset');
+      print('你需要滚动到 $offset');
       await _scrollController.animateTo(
         offset,
         duration: const Duration(milliseconds: 100),
